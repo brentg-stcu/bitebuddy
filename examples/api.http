@@ -1,0 +1,129 @@
+### ChatGPT API Example HTTP File
+
+# Base variables
+@baseUrl = https://api.openai.com/v1
+@apiKey = replace
+
+# List Models
+GET {{baseUrl}}/models
+Authorization: Bearer {{apiKey}}
+
+###
+
+# Create a Completion
+POST {{baseUrl}}/chat/completions
+Authorization: Bearer {{apiKey}}
+Content-Type: application/json
+
+{
+  "model": "gpt-4o-mini",
+  "prompt": "Write a poem about the ocean.",
+  "max_tokens": 100,
+  "temperature": 0.7
+}
+
+###
+
+# Create a Chat Completion
+POST {{baseUrl}}/chat/completions
+Authorization: Bearer {{apiKey}}
+Content-Type: application/json
+
+{
+  "model": "gpt-4",
+  "messages": [
+    { "role": "system", "content": "You are a helpful assistant." },
+    { "role": "user", "content": "Can you summarize the history of the internet?" }
+  ],
+  "temperature": 0.5
+}
+
+###
+
+# Generate an Image
+POST {{baseUrl}}/images/generations
+Authorization: Bearer {{apiKey}}
+Content-Type: application/json
+
+{
+  "prompt": "",
+  "n": 1,
+  "size": "1024x1024"
+}
+
+###
+
+# Retrieve a Fine-Tune Job
+GET {{baseUrl}}/fine-tunes/{fine_tune_id}
+Authorization: Bearer {{apiKey}}
+
+
+
+######################################
+
+### Generate a list of seven dinner ideas based on user preferences
+POST https://api.openai.com/v1/chat/completions
+Authorization: Bearer {{apiKey}}
+Content-Type: application/json
+
+{
+  "model": "gpt-4",
+  "messages": [
+    {
+      "role": "system",
+      "content": "You are a culinary expert AI specializing in creating diverse and personalized meal plans based on user preferences."
+    },
+    {
+      "role": "user",
+      "content": "Generate a list of seven dinner ideas. Each dinner should represent a different type of food. Ensure variety by including healthy options, comfort food, simple and complex meals, and meals ranging from budget-friendly to expensive."
+    },
+    {
+      "role": "user",
+      "content": "Here are my preferences: \n- Dislikes: spicy food, shellfish, and sphagetti. \n- Avoid: high carb meals.\n- Strong preferences: hamburger based meals, steaks, Asian cuisine, and fresh salads.\nGenerate ideas that align with these preferences."
+    }
+  ],
+  "temperature": 0.7
+}
+
+
+### Find recipes for a list of meals
+POST https://api.openai.com/v1/chat/completions
+Authorization: Bearer {{apiKey}}
+Content-Type: application/json
+
+{
+  "model": "gpt-4",
+  "messages": [
+    {
+      "role": "system",
+      "content": "You are a recipe expert who provides high-quality recipes from reputable sources. Your recipes are concise and to the point, with bullet points for ingredients and preparation steps. No long descriptions or irrelevant text."
+    },
+    {
+      "role": "user",
+      "content": "Find recipes for the following meals:\n1. Vegetarian Sushi Rolls\n2. Stir-Fried Tofu and Vegetables\n3. Mediterranean Quinoa Salad\n4. Gluten-Free Vegetable Pad Thai\n5. Zucchini Noodles with Pesto\n6. Vegetarian Chili\n7. Fresh Spring Rolls\n\nThe recipes should:\n- Be highly rated and come from quality sources.\n- Provide only the essential details (bullet-point format).\n- Include a list of ingredients and concise preparation instructions."
+    }
+  ],
+  "temperature": 0.7
+}
+
+
+### Generate a shopping list based on recipes
+POST https://api.openai.com/v1/chat/completions
+Authorization: Bearer {{apiKey}}
+Content-Type: application/json
+
+{
+  "model": "gpt-4",
+  "messages": [
+    {
+      "role": "system",
+      "content": "You are a culinary assistant that creates shopping lists grouped into logical categories. You calculate approximate costs for each item based on general market prices. Your goal is to stick closely to the ingredients in the recipes and provide a practical shopping list."
+    },
+    {
+      "role": "user",
+      "content": "Create a shopping list based on the following recipes:\n\n1. Vegetarian Sushi Rolls\n2. Stir-Fried Tofu and Vegetables\n3. Mediterranean Quinoa Salad\n4. Gluten-Free Vegetable Pad Thai\n5. Zucchini Noodles with Pesto\n6. Vegetarian Chili\n7. Fresh Spring Rolls\n\nThe shopping list should:\n- Group items into logical categories (e.g., Vegetables, Grains, Spices, etc.).\n- Include approximate costs for each item.\n- Stick as closely as possible to the ingredients in the recipes."
+    }
+  ],
+  "temperature": 0.7
+}
+
