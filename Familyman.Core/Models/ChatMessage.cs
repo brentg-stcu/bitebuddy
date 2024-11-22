@@ -1,4 +1,4 @@
-﻿namespace FoodFrenzy.Core.Models;
+﻿namespace Familyman.Core.Models;
 
 public class ChatMessage
 {

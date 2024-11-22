@@ -1,6 +1,6 @@
-﻿namespace FoodFrenzy.Core.HttpClients;
+﻿namespace Familyman.Core.HttpClients;
 
-using FoodFrenzy.Core.Models;
+using Familyman.Core.Models;
 using System;
 using System.Net.Http;
 using System.Net.Http.Json;
@@ -19,7 +19,6 @@ public class OpenAIChatClient : IOpenAIChatClient
 
     public OpenAIChatClient(HttpClient httpClient)
     {
-        //_httpClient = clientFactory.CreateClient(nameof(OpenAIChatClient)) ?? throw new ArgumentNullException(nameof(clientFactory));
         _httpClient = httpClient;
     }
 

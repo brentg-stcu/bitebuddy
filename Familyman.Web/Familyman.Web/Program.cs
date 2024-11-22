@@ -1,6 +1,6 @@
-using FoodFrenzy.Core.Services;
-using FoodFrenzy.Web.Components;
-using FoodFrenzy.Web.Startup;
+using Familyman.Core.Services;
+using Familyman.Web.Components;
+using Familyman.Web.Startup;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -37,6 +37,6 @@ app.UseAntiforgery();
 app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode()
     .AddInteractiveWebAssemblyRenderMode()
-    .AddAdditionalAssemblies(typeof(FoodFrenzy.Web.Client._Imports).Assembly);
+    .AddAdditionalAssemblies(typeof(Familyman.Web.Client._Imports).Assembly);
 
 app.Run();

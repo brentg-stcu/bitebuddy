@@ -8,8 +8,8 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\..\FoodFrenzy.Core\FoodFrenzy.Core.csproj" />
-		<ProjectReference Include="..\FoodFrenzy.Web.Client\FoodFrenzy.Web.Client.csproj" />
+		<ProjectReference Include="..\..\Familyman.Core\Familyman.Core.csproj" />
+		<ProjectReference Include="..\Familyman.Web.Client\Familyman.Web.Client.csproj" />
 		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="8.0.10" />
 		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.1" />
 		<PackageReference Include="Microsoft.Extensions.Http" Version="8.0.1" />

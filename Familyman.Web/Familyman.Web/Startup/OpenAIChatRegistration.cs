@@ -1,7 +1,7 @@
-﻿using FoodFrenzy.Core.HttpClients;
+﻿using Familyman.Core.HttpClients;
 using System.Net.Http.Headers;
 
-namespace FoodFrenzy.Web.Startup;
+namespace Familyman.Web.Startup;
 
 public static class OpenAIChatRegistration
 {

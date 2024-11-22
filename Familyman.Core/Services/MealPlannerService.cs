@@ -1,7 +1,7 @@
-﻿namespace FoodFrenzy.Core.Services;
+﻿namespace Familyman.Core.Services;
 
-using FoodFrenzy.Core.HttpClients;
-using FoodFrenzy.Core.Models;
+using Familyman.Core.HttpClients;
+using Familyman.Core.Models;
 using System.Threading.Tasks;
 
 public interface IMealPlannerService

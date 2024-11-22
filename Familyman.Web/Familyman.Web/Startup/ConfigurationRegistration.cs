@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 
-namespace FoodFrenzy.Web.Startup;
+namespace Familyman.Web.Startup;
 
 public static class ConfigurationRegistration
 {
