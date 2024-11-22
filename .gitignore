@@ -1,0 +1,26 @@
+echo "# Build Folders
+[Bb]in/
+[Oo]bj/
+
+# NuGet Packages
+*.nupkg
+**/packages/*
+
+# Include packages/build/ in case NuGet packages are cached
+!**/packages/build/
+
+# Windows binaries
+*.dll
+*.exe
+*.pdb
+*.mdb
+
+# Visual Studio files
+.vscode/
+.vs/
+*.user
+*.suo
+*.sln.docstates
+" > .gitignore
+
+secrets.json
