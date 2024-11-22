@@ -1,5 +1,4 @@
 ﻿using Familyman.Core.HttpClients;
-using System.Net.Http.Headers;
 
 namespace Familyman.Web.Startup;
 
@@ -14,7 +13,7 @@ public static class OpenAIChatRegistration
             {
                 client.BaseAddress = new Uri(settings.BaseUrl);
                 client.DefaultRequestHeaders.Add("Authorization", $"Bearer {settings.ApiKey}");
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                //client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             });
 
 

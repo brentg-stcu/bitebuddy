@@ -32,13 +32,22 @@ public class OpenAIChatClient : IOpenAIChatClient
             model,
             temperature,
             messages = messages.Select(
-                message => new { role = message.Type.ToString().ToLower(), content = message.Content }),
+                message => new { role = message.Role.ToString().ToLower(), content = message.Content }),
         };
+
 
         var jsonContent = new StringContent(JsonSerializer.Serialize(requestBody), Encoding.UTF8, "application/json");
         var response = await _httpClient.PostAsync(new Uri("completions", UriKind.Relative), jsonContent);
 
-        response.EnsureSuccessStatusCode();
+        try
+        {
+            response.EnsureSuccessStatusCode();
+        }
+        catch (HttpRequestException ex)
+        {
+            Console.WriteLine($"An error occurred: {ex.Message}");
+            throw new Exception(await response.Content.ReadAsStringAsync());
+        }
 
         var responseContent = await response.Content.ReadFromJsonAsync<JsonDocument>();
         return responseContent;

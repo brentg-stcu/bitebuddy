@@ -2,7 +2,7 @@
 
 public class ChatMessage
 {
-    public ChatMessageType Type { get; set; }
+    public ChatMessageType Role { get; set; }
     public string Content { get; set; } = string.Empty;
 }
 

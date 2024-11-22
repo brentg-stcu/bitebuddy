@@ -24,12 +24,12 @@ public class MealPlannerService : IMealPlannerService
         {
             new()
             {
-                Type = ChatMessageType.System,
+                Role = ChatMessageType.System,
                 Content = "You are a culinary expert AI that generates diverse meal plans tailored to user preferences."
             },
             new()
             {
-                Type = ChatMessageType.User,
+                Role = ChatMessageType.User,
                 Content = $"Generate a meal plan with the following preferences: {preferences}"
             }
         };

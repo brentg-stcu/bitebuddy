@@ -2,17 +2,16 @@
 
 # Base variables
 @baseUrl = https://api.openai.com/v1
-@apiKey = replace
 
 # List Models
 GET {{baseUrl}}/models
-Authorization: Bearer {{apiKey}}
+Authorization: Bearer {{openai-apikey}}
 
 ###
 
 # Create a Completion
 POST {{baseUrl}}/chat/completions
-Authorization: Bearer {{apiKey}}
+Authorization: Bearer {{openai-apikey}}
 Content-Type: application/json
 
 {
@@ -26,7 +25,7 @@ Content-Type: application/json
 
 # Create a Chat Completion
 POST {{baseUrl}}/chat/completions
-Authorization: Bearer {{apiKey}}
+Authorization: Bearer {{openai-apikey}}
 Content-Type: application/json
 
 {
@@ -42,7 +41,7 @@ Content-Type: application/json
 
 # Generate an Image
 POST {{baseUrl}}/images/generations
-Authorization: Bearer {{apiKey}}
+Authorization: Bearer {{openai-apikey}}
 Content-Type: application/json
 
 {
@@ -55,7 +54,7 @@ Content-Type: application/json
 
 # Retrieve a Fine-Tune Job
 GET {{baseUrl}}/fine-tunes/{fine_tune_id}
-Authorization: Bearer {{apiKey}}
+Authorization: Bearer {{openai-apikey}}
 
 
 
@@ -63,7 +62,7 @@ Authorization: Bearer {{apiKey}}
 
 ### Generate a list of seven dinner ideas based on user preferences
 POST https://api.openai.com/v1/chat/completions
-Authorization: Bearer {{apiKey}}
+Authorization: Bearer {{openai-apikey}}
 Content-Type: application/json
 
 {
@@ -88,7 +87,7 @@ Content-Type: application/json
 
 ### Find recipes for a list of meals
 POST https://api.openai.com/v1/chat/completions
-Authorization: Bearer {{apiKey}}
+Authorization: Bearer {{openai-apikey}}
 Content-Type: application/json
 
 {
@@ -109,7 +108,7 @@ Content-Type: application/json
 
 ### Generate a shopping list based on recipes
 POST https://api.openai.com/v1/chat/completions
-Authorization: Bearer {{apiKey}}
+Authorization: Bearer {{openai-apikey}}
 Content-Type: application/json
 
 {
