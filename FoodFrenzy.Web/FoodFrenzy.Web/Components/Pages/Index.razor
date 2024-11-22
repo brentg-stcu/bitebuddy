@@ -1,0 +1,31 @@
+﻿@page "/"
+@inject NavigationManager Navigation
+
+
+<PageTitle>Home</PageTitle>
+<h1>Welcome to Recipe Planner</h1>
+
+<p>
+    Plan your meals, find recipes, and create detailed shopping lists with the power of AI.
+</p>
+
+<h3>Features:</h3>
+<ul>
+    <li>🎯 Generate diverse meal plans tailored to your preferences.</li>
+    <li>📋 Find high-quality recipes with concise instructions.</li>
+    <li>🛒 Create shopping lists grouped by category and with cost estimates.</li>
+    <li>✨ Customize meal plans to suit dietary restrictions and taste preferences.</li>
+</ul>
+
+<p>
+    Ready to start planning your meals? Use the navigation menu to explore our features!
+</p>
+
+<button class="btn btn-primary" @onclick="NavigateToMealPlanner">Get Started</button>
+
+@code {
+    private void NavigateToMealPlanner()
+    {
+        Navigation.NavigateTo("/mealplanner");
+    }
+}

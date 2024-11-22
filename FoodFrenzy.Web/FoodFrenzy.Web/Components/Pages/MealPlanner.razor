@@ -1,0 +1,58 @@
+﻿@page "/mealplanner"
+@inject IMealPlannerService _mealPlanner
+@using FoodFrenzy.Core.Services
+
+
+<h2 class="text-center mt-4">Meal Planner</h2>
+<div class="container">
+    <div class="mb-4">
+        <label for="preferences" class="form-label">Enter Your Preferences:</label>
+        <textarea id="preferences" class="form-control" rows="4" @bind="UserPreferences">
+            prefer mexican, meat, and hamburger based meals. avoid high-carb meals and spaghetti. 
+        </textarea>
+    </div>
+    <button class="btn btn-primary" @onclick="GenerateMealPlan" disabled="@IsLoading">
+        @if (IsLoading)
+        {
+            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+            <span>Generating...</span>
+        }
+        else
+        {
+            <span>Generate Meal Plan</span>
+        }
+    </button>
+</div>
+
+@if (!string.IsNullOrEmpty(MealPlan))
+{
+    <div class="mt-5">
+        <h4>Your Meal Plan:</h4>
+        <pre class="bg-light p-3 rounded">@MealPlan</pre>
+    </div>
+}
+
+@code {
+    //[Inject] private IMealPlannerService _mealPlanner { get; set; }
+
+    private string UserPreferences = string.Empty;
+    private string MealPlan = string.Empty;
+    private bool IsLoading = false;
+
+    private async Task GenerateMealPlan()
+    {
+        IsLoading = true;
+        try
+        {
+            MealPlan = await _mealPlanner.GenerateMealPlanAsync(UserPreferences);
+        }
+        catch (Exception ex)
+        {
+            MealPlan = $"Error generating meal plan: {ex.Message}";
+        }
+        finally
+        {
+            IsLoading = false;
+        }
+    }
+}
