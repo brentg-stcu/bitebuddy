@@ -1,0 +1,73 @@
+﻿@page "/mealplanner"
+@inject IMealPlannerService _mealPlanner
+@using Familyman.Core.Models
+@using Familyman.Core.Services
+
+
+<h2 class="text-center mt-4">Meal Planner</h2>
+<div class="container">
+    <div class="mb-4">
+        <label for="preferences" class="form-label">Enter Your Preferences:</label>
+        <textarea id="preferences" class="form-control" rows="4" @bind="_userPreferences">
+            prefer mexican, meat, and hamburger based meals. avoid high-carb meals and spaghetti. 
+        </textarea>
+    </div>
+    <button class="btn btn-primary" @onclick="GenerateMealPlan" disabled="@_isLoading">
+        @if (_isLoading)
+        {
+            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+            <span>Generating...</span>
+        }
+        else
+        {
+            <span>Generate Meal Plan</span>
+        }
+    </button>
+</div>
+
+@if (_mealPlan.Any())
+{
+    <div class="mt-5">
+        <h4>Your Meal Plan:</h4>
+        <div class="row">
+            @foreach (var meal in _mealPlan)
+            {
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">@meal.Name</h5>
+                            <p class="card-text">@meal.Description</p>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+
+
+    <hr/>
+    <ShoppingListComponent MealPlan="_mealPlan" />
+}
+
+@code {
+    private bool _isLoading = false;
+    private string _userPreferences = string.Empty;
+    private IEnumerable<Meal> _mealPlan = [];
+
+    private async Task GenerateMealPlan()
+    {
+        _isLoading = true;
+        try
+        {
+            _mealPlan = await _mealPlanner.GenerateMealPlanAsync(_userPreferences);
+        }
+        catch (Exception ex)
+        {
+            //MealPlan = $"Error generating meal plan: {ex.Message}";
+        }
+        finally
+        {
+            _isLoading = false;
+        }
+    }
+}

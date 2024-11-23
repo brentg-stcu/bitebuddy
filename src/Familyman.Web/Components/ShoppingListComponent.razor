@@ -1,0 +1,72 @@
+﻿@inject IMealPlannerService _mealPlannerService
+@using Familyman.Core.Models
+@using Familyman.Core.Services
+
+
+<h3>Shopping List</h3>
+<button class="btn btn-primary" @onclick="GenerateShoppingList" disabled="@_isLoading">
+    @if (_isLoading)
+    {
+        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+        <span>Generating...</span>
+    }
+    else
+    {
+        <span>Create Shopping List</span>
+    }
+</button>
+
+@if (_shoppingList.Any())
+{
+    <table class="table table-striped mt-4">
+        <thead>
+            <tr>
+                <th>Item</th>
+                <th>Quantity</th>
+                <th>Average Price</th>
+                <th>Food Group</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in _shoppingList.OrderBy(s => s.FoodGroup))
+            {
+                <tr>
+                    <td>@item.Name</td>
+                    <td>@item.Quantity</td>
+                    <td>@item.AveragePrice</td>
+                    <td>@item.FoodGroup</td>
+                </tr>
+            }
+        </tbody>
+        <tr>
+            <td colspan="4" class="text-end">
+                <strong>Total Cost: @string.Format("{0:C}", _shoppingList.Sum(s => s.AveragePrice * s.Quantity))</strong>
+            </td>
+        </tr>
+    </table>
+}
+
+
+
+@code {
+    [Parameter] public IEnumerable<Meal> MealPlan { get; set; } = [];
+    private bool _isLoading = false;
+    private IEnumerable<ShoppingListItem> _shoppingList = [];
+
+    private async Task GenerateShoppingList()
+    {
+        _isLoading = true;
+        try
+        {
+            _shoppingList = await _mealPlannerService.GenerateShoppingList(MealPlan);
+        }
+        catch (Exception ex)
+        {
+            //MealPlan = $"Error generating meal plan: {ex.Message}";
+        }
+        finally
+        {
+            _isLoading = false;
+        }
+    }
+}
