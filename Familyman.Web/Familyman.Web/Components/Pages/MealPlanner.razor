@@ -24,11 +24,29 @@
     </button>
 </div>
 
-@if (!string.IsNullOrEmpty(MealPlan))
+@if (MealPlan.Any())
 {
     <div class="mt-5">
         <h4>Your Meal Plan:</h4>
-        <pre class="bg-light p-3 rounded">@MealPlan</pre>
+        <div class="row">
+            @foreach (var meal in MealPlan)
+            {
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">@meal.Name</h5>
+                            <p class="card-text">@meal.Description</p>
+                            @* <ul class="list-group list-group-flush">
+                                @foreach (var ingredient in meal.Ingredients)
+                                {
+                                    <li class="list-group-item">@ingredient</li>
+                                }
+                            </ul> *@
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
     </div>
 }
 
@@ -36,7 +54,7 @@
     //[Inject] private IMealPlannerService _mealPlanner { get; set; }
 
     private string UserPreferences = string.Empty;
-    private string MealPlan = string.Empty;
+    private List<Meal> MealPlan = [];
     private bool IsLoading = false;
 
     private async Task GenerateMealPlan()
@@ -48,7 +66,7 @@
         }
         catch (Exception ex)
         {
-            MealPlan = $"Error generating meal plan: {ex.Message}";
+            //MealPlan = $"Error generating meal plan: {ex.Message}";
         }
         finally
         {
